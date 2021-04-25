@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F6EF"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/bgg"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wlcm2"
+        android:layout_gravity="center"
+        android:layout_marginTop="-50dp"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wlcm_description2"
+        android:fontFamily="@font/kanit"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+
+        android:inputType="text"
+        android:id="@+id/username"
+        android:fontFamily="@font/kanit"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:hint="@string/username"
+        />
+
+    <EditText
+
+        android:inputType="textEmailAddress"
+        android:id="@+id/email"
+        android:fontFamily="@font/kanit"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:hint="@string/email"
+        />
+
+    <EditText
+        android:inputType="textPassword"
+        android:id="@+id/password"
+        android:layout_width="270dp"
+        android:fontFamily="@font/kanit"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:hint="@string/password"
+        />
+
+    <CheckBox android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/kanit"
+        android:textColor="@color/lightGray"
+        android:text="@string/terms_conditions"
+        />
+
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/kanit"
+        android:text="Sign Up"
+        android:textSize="16dp"
+        android:background="@drawable/custom_button"
+        />
+
+    <TextView
+        android:id="@+id/signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/have_an_acc"
+        android:layout_gravity="center"
+        android:textSize="13sp"
+        android:fontFamily="@font/kanit"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        />
+
+</LinearLayout>

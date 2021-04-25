@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Wallpapers4u</string>
+
+    <!-- Page d'acceuil -->
+    <string name="home_page_title1">Best wallpapers</string>
+    <string name="home_page_title2">For you</string>
+    <string name="home_page_button">Get Started</string>
+
+
+    <string name="wlcm">Welcome Back</string>
+    <string name="wlcm_description">Sign in to connect with us!</string>
+    <string name="wlcm_description2">Sign up and join us today!</string>
+    <string name="wlcm2">Welcome</string>
+    <string name="login">LOGIN</string>
+    <string name="don_t_have_an_account_yet_sign_up">Don\'t have an account yet? Sign up</string>
+    <string name="have_an_acc">Have an account? Sign in</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email_enter">Please enter your e-mail</string>
+    <string name="email_invalid">Please verify your email</string>
+    <string name="password_enter">Please enter your password</string>
+    <string name="password_length_error">Your password should be 6 characters long</string>
+    <string name="AlertTitle">Error</string>
+    <string name="AlertOKButton">Ok</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+    <string name="terms_conditions">I agree to the terms and conditions of use</string>
+
+</resources>
