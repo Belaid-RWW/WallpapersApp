@@ -60,6 +60,7 @@
         android:alpha="0.3"
         android:id="@+id/img_background"
         android:scaleType="centerCrop"
+        android:background="@drawable/splash"
         tools:src="@drawable/splash"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

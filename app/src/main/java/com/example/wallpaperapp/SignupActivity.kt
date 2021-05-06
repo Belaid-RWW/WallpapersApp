@@ -1,88 +1,70 @@
 package com.example.wallpaperapp
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_signup.*
+import java.util.regex.Pattern
 
 class SignupActivity : AppCompatActivity() {
 
-    lateinit var btnSignup: Button
-    lateinit var tvSignin: TextView
-
-    lateinit var username: EditText
-    lateinit var etEmail: EditText
-    lateinit var etPassword: EditText
-    lateinit var etCheckbox:CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        btnSignup = findViewById(R.id.btn_signup)
-        tvSignin = findViewById(R.id.signin)
-
-        username = findViewById(R.id.username)
-        etEmail = findViewById(R.id.email)
-        etPassword = findViewById(R.id.password)
-        etCheckbox = findViewById(R.id.checkbox);
-
-
-
-        btnSignup.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-        }
-        tvSignin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
-
-
-        btnSignup.setOnClickListener {
-            //Recuperer les valeurs entrées
-            val name = username.editableText.toString()
-            val email = etEmail.editableText.toString()
-            val password = etPassword.editableText.toString()
+        btn_signup.setOnClickListener {
+            val name = et_Username.editableText.toString()
+            val email = et_Email.editableText.toString()
+            val password = et_Password.editableText.toString()
             if (validateInputs(email, password)) {
-                val intent = Intent(this, HomeActivity::class.java)
-                intent.putExtra(EMAIL_EXTRA, email) // on veut passer du data
-                startActivity(intent)
-            }
-            if (!etCheckbox.isChecked()) {
-                Toast.makeText(this, "Please confirm terms and conditions", Toast.LENGTH_LONG)
-                    .show() //message de 3 sec
+                saveUserToFirebase(email, password)
             }
 
-            if (name.length == 0) {
-                username.setError("Field should not be Empty")
-            } else if (!name.matches(Regex("[a-zA-Z ]+"))) {
-                username.setError("Enter Only Alphabetical Characters");
-            }
+        }
+        signin.setOnClickListener {
+            goToLoginActivity()
         }
     }
+
+    private fun goToLoginActivity() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
+    }
+
     private fun validateInputs(email: String, password: String): Boolean {
         if (email.isEmpty()) {
-            etEmail.error = getString(R.string.email_enter)
+            et_Email.error = getString(R.string.empty_mail)
             return false
         }
-
-        if (isEmailInvalid(email)) {
-            showAlert(getString(R.string.email_invalid))
-        }
-
         if (password.isEmpty()) {
-            etPassword.error = getString(R.string.password_enter)
+            et_Password.error = getString(R.string.empty_password)
             return false
         }
-
-
-        if (password.length < 6) {
-            showAlert(getString(R.string.password_length_error))
+        if (isEmailInvalid(email)) {
+            showAlert(getString(R.string.invalid_mail))
+            return false
         }
-
+        if (!checkPassword(password)) {
+            showAlert(getString(R.string.invalid_password))
+            return false
+        }
         return true
+    }
+
+    fun checkPassword(password: String): Boolean {
+        val passwordREGEX = Pattern.compile(
+            "^" +
+                    "(?=.*[!&{}¿?.<>~()^@+*/=;:#%\$])" +
+                    ".{8,}" +
+                    "$"
+        )
+        return passwordREGEX.matcher(password).matches()
     }
 
     private fun isEmailInvalid(email: String): Boolean {
@@ -95,5 +77,22 @@ class SignupActivity : AppCompatActivity() {
         alertDialog.setMessage(message)
         alertDialog.setPositiveButton(getString(R.string.AlertOKButton)) { dialog, i -> dialog.dismiss() }
         alertDialog.create().show()
+    }
+
+    private fun saveCredentialsToSharedPrefs(email: String, password: String) {
+        val preference: SharedPreferences = getSharedPreferences(PACKAGE_NAMEE, Context.MODE_PRIVATE)
+        preference.edit().putString(EMAILL, email).apply()
+        preference.edit().putString(PASSWORDD, password).apply()
+    }
+
+    private fun saveUserToFirebase(email: String, password: String) {
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { result ->
+                if (result.isSuccessful) {
+                    goToLoginActivity()
+                }
+            }.addOnFailureListener {
+                showAlert("failed To register")
+            }
     }
 }
